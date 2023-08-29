@@ -78,6 +78,9 @@ class PdfControllerPinch extends TransformationController
 
       _document = await documentFuture;
 
+      if (_state == null) {
+        return;
+      }
       _state!._pages.clear();
       final List<_PdfPageState> pages = [];
       final firstPage = await _document!.getPage(1, autoCloseAndroid: true);
@@ -90,6 +93,10 @@ class PdfControllerPinch extends TransformationController
           pageNumber: i + 1,
           pageSize: firstPageSize,
         ));
+      }
+
+      if (_state == null) {
+        return;
       }
       _state!._firstControllerAttach = true;
       _state!._pages.addAll(pages);
