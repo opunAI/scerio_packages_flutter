@@ -96,6 +96,9 @@ class PdfControllerPinch extends TransformationController
 
       loadingState.value = PdfLoadingState.success;
     } catch (error) {
+      if (_state == null) {
+        return;
+      }
       _state!._loadingError =
           error is Exception ? error : Exception('Unknown error');
       loadingState.value = PdfLoadingState.error;
